@@ -6,3 +6,6 @@
 //
 
 import Foundation
+
+typealias successClousure = ([Bootcamp]) -> Void
+typealias errorClousure = () -> Void

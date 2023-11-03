@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct Bootcamp: Codable {
+    let id: UUID
+    let name: String
+}

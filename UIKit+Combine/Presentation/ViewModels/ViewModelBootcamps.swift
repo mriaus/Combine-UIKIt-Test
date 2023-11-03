@@ -6,3 +6,20 @@
 //
 
 import Foundation
+import Combine
+final class ViewModelBootcamps {
+    
+     var bootcamps: [Bootcamp] = []
+    var isLoading: Bool = false
+    
+    private let useCase: caseUseBootcamProtocol
+    
+    init(useCase: CaseUseBootCamp){
+        self.useCase = useCase
+    }
+    
+    func getBootcamps() -> AnyPublisher<[Bootcamp], Error>{
+        return useCase.loadBootcamps()
+    }
+    
+}
