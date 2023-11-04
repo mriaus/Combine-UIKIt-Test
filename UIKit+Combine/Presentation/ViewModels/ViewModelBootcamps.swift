@@ -9,7 +9,8 @@ import Foundation
 import Combine
 final class ViewModelBootcamps {
     
-     var bootcamps: [Bootcamp] = []
+    @Published var bootcamps: [Bootcamp] = []
+    private var cancellables = Set<AnyCancellable>()
     var isLoading: Bool = false
     
     private let useCase: caseUseBootcamProtocol
@@ -18,8 +19,12 @@ final class ViewModelBootcamps {
         self.useCase = useCase
     }
     
-    func getBootcamps() -> AnyPublisher<[Bootcamp], Error>{
-        return useCase.loadBootcamps()
+    func getBootcamps() {
+        useCase.loadBootcamps()
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { [weak self] bootcamps in
+                self?.bootcamps = bootcamps
+            })
+            .store(in: &cancellables)
     }
-    
 }

@@ -17,7 +17,6 @@ final class CaseUseBootCamp: caseUseBootcamProtocol {
     
     func loadBootcamps() -> AnyPublisher<[Bootcamp], Error> {
            guard let url = URL(string: "https://dragonball.keepcoding.education/api/data/bootcamps") else {
-               print("URL inválida")
                return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
            }
 
